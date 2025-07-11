@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 
