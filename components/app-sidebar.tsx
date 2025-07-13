@@ -39,7 +39,7 @@ export function AppSidebar() {
         <div className="absolute top-3 left-3">
           <SidebarTrigger />
         </div>
-        <p className="text-xl font-bold text-center">Claude</p>
+        <p className="text-xl font-bold text-center">xcout ai</p>
         <Button className="font-semibold">New Chat</Button>
       </SidebarHeader>
       <SidebarContent>
