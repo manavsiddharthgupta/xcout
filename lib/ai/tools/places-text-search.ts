@@ -1,6 +1,7 @@
 import { tool } from "ai"
 import { z } from "zod"
 import { GOOGLE_MAPS_API_URL } from "@/constants/urls"
+import { importantFields } from "@/constants/fields"
 
 type PlacesTextSearchParams = {
   textQuery: string
@@ -28,7 +29,11 @@ export const placesTextSearchTool = tool({
   description:
     "Search for places using Google Places API with text query and various filters",
   parameters: z.object({
-    textQuery: z.string().describe("The text query to search for places"),
+    textQuery: z
+      .string()
+      .describe(
+        'The text string on which to search, for example: "restaurant", "123 Main Street", or "best place to visit in San Francisco". The tool returns candidate matches based on this string and orders the results based on their perceived relevance.'
+      ),
     includedType: z
       .string()
       .optional()
@@ -118,12 +123,11 @@ export async function performPlacesTextSearch(
     "X-Goog-Api-Key": apiKey,
   }
 
-  const fieldMask = Array.isArray(fields) ? fields.join(",") : undefined
-  if (fieldMask) {
-    headers["X-Goog-FieldMask"] = fieldMask
-  } else {
-    headers["X-Goog-FieldMask"] = "*"
-  }
+  const fieldMask = Array.isArray(fields)
+    ? fields.join(",")
+    : importantFields.join(",")
+
+  headers["X-Goog-FieldMask"] = fieldMask
 
   try {
     const response = await fetch(url.toString(), {

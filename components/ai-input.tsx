@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, Paperclip } from "lucide-react"
+import { ArrowRight, Paperclip, Pause } from "lucide-react"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { useAutoResizeTextarea } from "@/hooks/use-auto-resize-textarea"
@@ -9,10 +9,14 @@ export default function AI_Prompt({
   value,
   setValue,
   onSubmit,
+  status,
+  stop,
 }: {
   value: string
   setValue: (value: string) => void
   onSubmit: () => void
+  stop: () => void
+  status: "error" | "submitted" | "streaming" | "ready"
 }) {
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
     minHeight: 72,
@@ -22,7 +26,7 @@ export default function AI_Prompt({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
-      if (value.trim()) {
+      if (value.trim() || status === "ready") {
         onSubmit()
       }
     }
@@ -56,32 +60,46 @@ export default function AI_Prompt({
                 <div className="flex items-center gap-2">
                   <label
                     className={cn(
-                      "rounded-lg p-2 bg-black/5 dark:bg-white/5 cursor-pointer",
-                      "hover:bg-black/10 dark:hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-blue-500",
-                      "text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white"
+                      "rounded-lg p-2 bg-black/5 dark:bg-white/5 cursor-default",
+                      "focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-blue-500",
+                      "text-black/40 dark:text-white/40"
                     )}
                     aria-label="Attach file"
                   >
-                    <input type="file" className="hidden" />
+                    <input disabled type="file" className="hidden" />
                     <Paperclip className="w-4 h-4 transition-colors" />
                   </label>
                 </div>
-                <button
-                  type="submit"
-                  className={cn(
-                    "rounded-lg p-2 bg-black/5 dark:bg-white/5",
-                    "hover:bg-black/10 dark:hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-blue-500"
-                  )}
-                  aria-label="Send message"
-                  disabled={!value.trim()}
-                >
-                  <ArrowRight
+                {status === "streaming" || status === "submitted" ? (
+                  <button
+                    type="button"
                     className={cn(
-                      "w-4 h-4 dark:text-white transition-opacity duration-200",
-                      value.trim() ? "opacity-100" : "opacity-30"
+                      "rounded-lg p-2 bg-black/5 dark:bg-white/5",
+                      "hover:bg-black/10 dark:hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-blue-500"
                     )}
-                  />
-                </button>
+                    aria-label="Send message"
+                    onClick={stop}
+                  >
+                    <Pause className="w-4 h-4 dark:text-white" />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className={cn(
+                      "rounded-lg p-2 bg-black/5 dark:bg-white/5",
+                      "hover:bg-black/10 dark:hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-blue-500"
+                    )}
+                    aria-label="Send message"
+                    disabled={!value.trim()}
+                  >
+                    <ArrowRight
+                      className={cn(
+                        "w-4 h-4 dark:text-white transition-opacity duration-200",
+                        value.trim() ? "opacity-100" : "opacity-30"
+                      )}
+                    />
+                  </button>
+                )}
               </div>
             </div>
           </div>

@@ -10,12 +10,14 @@ import { AIMessage, AIMessageContent } from "@/components/ui/kibo-ui/ai/message"
 // } from "@/components/ui/kibo-ui/ai/tool"
 import { useEffect, useRef } from "react"
 import { UIMessage } from "ai"
+import { Spinner } from "@/components/ui/kibo-ui/spinner"
 
 interface MessagesProps {
   messages: UIMessage[]
+  status: "error" | "submitted" | "streaming" | "ready"
 }
 
-export default function Messages({ messages }: MessagesProps) {
+export default function Messages({ messages, status }: MessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -30,46 +32,30 @@ export default function Messages({ messages }: MessagesProps) {
     <div className="flex-1 max-w-3xl w-full mx-auto mt-16 px-4">
       {messages.map((message) => (
         <AIMessage from={message.role as "user" | "assistant"} key={message.id}>
-          <AIMessageContent>
-            {message.parts.map(
-              (part: UIMessage["parts"][number], i: number) => {
+          {message.parts.some((part) => part.type === "text") && (
+            <AIMessageContent>
+              {message.parts.map((part, index) => {
                 switch (part.type) {
                   case "text":
-                    return (
-                      <AIResponse key={`${message.id}-${i}`}>
-                        {part.text}
-                      </AIResponse>
-                    )
-                  // case "tool-invocation": {
-                  //   const toolName = part.toolInvocation.toolName
-                  //   const args = part.toolInvocation.args
-                  //   const result =
-                  //     part.toolInvocation.state === "result"
-                  //       ? part.toolInvocation.result
-                  //       : null
-                  //   return (
-                  //     <AITool key={`${message.id}-${i}`} status="completed">
-                  //       <AIToolHeader name={toolName} status="completed" />
-                  //       <AIToolContent>
-                  //         <AIToolParameters parameters={args} />
-                  //         {result && (
-                  //           <AIToolResult
-                  //             result={JSON.stringify(result, null, 2)}
-                  //           />
-                  //         )}
-                  //       </AIToolContent>
-                  //     </AITool>
-                  // )
-                  // }
-                  default:
-                    return null
+                    if (message.role === "assistant") {
+                      return (
+                        <AIResponse key={part.type + index}>
+                          {part.text}
+                        </AIResponse>
+                      )
+                    }
+                    return part.text
                 }
-              }
-            )}
-          </AIMessageContent>
+              })}
+            </AIMessageContent>
+          )}
         </AIMessage>
       ))}
       <div ref={messagesEndRef} />
+      {status === "submitted" ||
+        (status === "streaming" && (
+          <Spinner variant="pinwheel" className="w-6 h-6 mb-4" />
+        ))}
     </div>
   )
 }
