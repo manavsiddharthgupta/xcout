@@ -28,6 +28,22 @@ export default function Messages({ messages, status }: MessagesProps) {
     scrollToBottom()
   }, [messages])
 
+  if (messages.length === 0) {
+    return (
+      <div className="flex-1 max-w-3xl w-full mx-auto mt-16 px-4">
+        <div className="flex flex-col justify-center h-full gap-2">
+          <p className="font-bold text-3xl">Hello there!</p>
+          <p className="text-muted-foreground text-lg">
+            You can search for places like <b>pizza in New York</b>,{" "}
+            <b>shoe stores near Ottawa</b>, or specific addresses like{" "}
+            <b>123 Main Street</b>. I can help you find businesses, landmarks,
+            and locations even with ambiguous queries!
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex-1 max-w-3xl w-full mx-auto mt-16 px-4">
       {messages.map((message) => (

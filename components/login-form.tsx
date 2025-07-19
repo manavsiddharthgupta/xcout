@@ -25,6 +25,7 @@ import { signIn } from "@/lib/auth-client"
 import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import GoogleIcon from "./google-icon"
 
 export default function LoginComponent() {
   return (
@@ -44,7 +45,7 @@ export default function LoginComponent() {
   )
 }
 
-export const LoginForm = () => {
+export const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const schema = z.object({
     email: z.string().email({ message: "Please enter a valid email address" }),
     password: z
@@ -67,6 +68,23 @@ export const LoginForm = () => {
         password: values.password,
       })
       if (!error) {
+        onSuccess?.()
+        router.push("/")
+      } else {
+        throw new Error(error.message)
+      }
+    } catch (err: any) {
+      toast.error(err?.message || "Login failed")
+    }
+  }
+
+  const signInWithGoogle = async () => {
+    try {
+      const { error } = await signIn.social({
+        provider: "google",
+      })
+      if (!error) {
+        onSuccess?.()
         router.push("/")
       } else {
         throw new Error(error.message)
@@ -128,7 +146,13 @@ export const LoginForm = () => {
               "Login"
             )}
           </Button>
-          <Button variant="outline" className="w-full" type="button">
+          <Button
+            variant="outline"
+            className="w-full"
+            type="button"
+            onClick={signInWithGoogle}
+          >
+            <GoogleIcon />
             Login with Google
           </Button>
         </div>

@@ -88,7 +88,7 @@ const Chat = ({
           <DialogDescription>
             You must be logged in to use the chat feature.
           </DialogDescription>
-          <LoginForm />
+          <LoginForm onSuccess={() => setShowDialog(false)} />
         </DialogContent>
       </Dialog>
     </>

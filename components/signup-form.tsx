@@ -21,10 +21,11 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form"
-import { signUp } from "@/lib/auth-client"
+import { signIn, signUp } from "@/lib/auth-client"
 import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import GoogleIcon from "./google-icon"
 
 export default function SignUpComponent() {
   return (
@@ -75,6 +76,21 @@ export const SignUpForm = () => {
       }
     } catch (err: any) {
       toast.error(err?.message || "Sign up failed")
+    }
+  }
+
+  const signInWithGoogle = async () => {
+    try {
+      const { error } = await signIn.social({
+        provider: "google",
+      })
+      if (!error) {
+        router.push("/")
+      } else {
+        throw new Error(error.message)
+      }
+    } catch (err: any) {
+      toast.error(err?.message || "Login failed")
     }
   }
 
@@ -135,7 +151,13 @@ export const SignUpForm = () => {
               "Sign up"
             )}
           </Button>
-          <Button variant="outline" className="w-full" type="button">
+          <Button
+            variant="outline"
+            className="w-full"
+            type="button"
+            onClick={signInWithGoogle}
+          >
+            <GoogleIcon />
             Login with Google
           </Button>
         </div>

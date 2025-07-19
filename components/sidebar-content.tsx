@@ -286,13 +286,16 @@ export function SidebarContentComponent() {
       )}
 
       {/* Empty state */}
-      {!isLoading && Object.keys(groupedChats).length === 0 && !error && (
-        <div className="p-4 text-center text-muted-foreground min-h-[calc(100vh-10rem)] flex flex-col justify-center items-center">
-          <MessageCircle className="h-8 w-8 mx-auto mb-2 opacity-50" />
-          <p className="text-sm">No chats yet</p>
-          <p className="text-xs">Start a new conversation!</p>
-        </div>
-      )}
+      {!isLoading &&
+        !isLoadingMore &&
+        Object.keys(groupedChats).length === 0 &&
+        !error && (
+          <div className="p-4 text-center text-muted-foreground min-h-[calc(100vh-10rem)] flex flex-col justify-center items-center">
+            <MessageCircle className="h-8 w-8 mx-auto mb-2 opacity-50" />
+            <p className="text-sm">No chats yet</p>
+            <p className="text-xs">Start a new conversation!</p>
+          </div>
+        )}
     </SidebarContent>
   )
 }
