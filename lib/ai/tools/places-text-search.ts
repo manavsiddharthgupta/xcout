@@ -72,17 +72,12 @@ export const placesTextSearchTool = tool({
       .boolean()
       .optional()
       .describe("Filter to only show places open now"),
-    fields: z
-      .array(z.string())
-      .optional()
-      .describe("Specific fields to return in the response"),
   }),
   execute: async (params) => {
     try {
-      const { fields, ...searchParams } = params
+      const { ...searchParams } = params
       const result = await performPlacesTextSearch(
-        searchParams as PlacesTextSearchParams,
-        fields
+        searchParams as PlacesTextSearchParams
       )
       return {
         success: true,
@@ -102,10 +97,7 @@ export const placesTextSearchTool = tool({
   },
 })
 
-export async function performPlacesTextSearch(
-  options: PlacesTextSearchParams,
-  fields?: string[]
-) {
+export async function performPlacesTextSearch(options: PlacesTextSearchParams) {
   const url = new URL(GOOGLE_MAPS_API_URL)
 
   if (options.regionCode) {
@@ -123,9 +115,7 @@ export async function performPlacesTextSearch(
     "X-Goog-Api-Key": apiKey,
   }
 
-  const fieldMask = Array.isArray(fields)
-    ? fields.join(",")
-    : importantFields.join(",")
+  const fieldMask = importantFields.join(",")
 
   headers["X-Goog-FieldMask"] = fieldMask
 

@@ -1,36 +1,8 @@
 import Link from "next/link"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarHeader,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
+import { Sidebar, SidebarHeader, SidebarTrigger } from "@/components/ui/sidebar"
 import { Button } from "./ui/button"
-
-// Menu items.
-const items = [
-  {
-    title: "New Chat",
-  },
-  {
-    title: "How to build a React app?",
-  },
-  {
-    title: "Explain machine learning basics",
-  },
-  {
-    title: "JavaScript best practices",
-  },
-  {
-    title: "Help with CSS flexbox",
-  },
-]
+import { Plus } from "lucide-react"
+import { SidebarContentComponent } from "./sidebar-content"
 
 export function AppSidebar() {
   return (
@@ -40,24 +12,15 @@ export function AppSidebar() {
           <SidebarTrigger />
         </div>
         <p className="text-xl font-bold text-center">xcout ai</p>
-        <Button className="font-semibold">New Chat</Button>
+        <Button className="font-semibold" asChild>
+          <Link href="/">
+            <Plus className="h-4 w-4" />
+            New Chat
+          </Link>
+        </Button>
       </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Today</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={`/chat/${item.title}`}>{item.title}</Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
+
+      <SidebarContentComponent />
     </Sidebar>
   )
 }

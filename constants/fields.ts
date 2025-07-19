@@ -24,13 +24,10 @@ export const importantFields = [
   "places.websiteUri",
 
   // High-Value Atmosphere Fields
-  "places.reviews",
   "places.reviewSummary",
   "places.editorialSummary",
   "places.takeout",
   "places.dineIn",
   "places.parkingOptions",
   "places.paymentOptions",
-  "places.currentOpeningHours",
-  ,
 ]

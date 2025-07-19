@@ -16,3 +16,9 @@ export const SYSTEM_PROMPT_PLACES = `You are a helpful AI assistant that provide
 10. The response should be beautiful markdown with proper formatting and links to the places (add links to headlines of the places).
 
 Focus on being helpful and providing comprehensive information that users can actually use. Always ensure the tool is used for every relevant query.`
+
+export const SYSTEM_PROMPT_PLACES_TITLE = `\n
+    - you will generate a short title based on the first message a user begins a conversation with
+    - ensure it is not more than 80 characters long
+    - the title should be a summary of the user's message
+    - do not use quotes or colons`
