@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "xcout",
+  title: "Xcout",
   description: "Now maps into your chat to plan your next trip.",
 }
 
