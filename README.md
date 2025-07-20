@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗺️ **Xcout AI**
 
-## Getting Started
+> **Now Google Places searches live in your chat!** Skip the endless scrolling through maps - just ask and discover places through natural conversation.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ **What is this?**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+We transforms how you discover places by bringing **Google Places API directly into a conversational chat interface**. Instead of wrestling with map pins and complex filters, simply ask questions like a human would:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- _"Find me cozy coffee shops near Central Park"_
+- _"What are the best sushi restaurants in Tokyo?"_
+- _"Tell me about 123 Main Street, New York"_
+- _"Show me budget-friendly hotels near the airport"_
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Get **rich, actionable place information** with ratings, reviews, contact details, and direct Google Maps links - all through natural conversation.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 **Why?**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **🤖 Conversational Discovery**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+No more clicking through endless map markers. Ask questions naturally and get intelligent, formatted responses about places.
 
-## Deploy on Vercel
+### **🔍 Smart Search Intelligence**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Powered by **Google Gemini AI** + **Google Places API**, understanding context, location nuances, and providing comprehensive place insights.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **📱 Clean, Modern Experience**
+
+- Beautiful dark/light theme interface
+- Mobile-responsive design
+- Persistent chat history
+- Lightning-fast search results
+
+### **🎯 Focused on Places**
+
+Unlike general-purpose AI, Xcout AI specializes exclusively in location-based queries, making it incredibly effective for:
+
+- **Travel planning**
+- **Local business discovery**
+- **Address verification**
+- **Restaurant & venue research**
+- **Location-based recommendations**
+
+---
+
+## 🚀 **Perfect For**
+
+- **🧳 Travelers** planning their next adventure
+- **🏪 Local explorers** discovering hidden gems in their city
+- **🍽️ Foodies** hunting for the perfect dining experience
+- **🏢 Business professionals** researching locations and venues
+- **🏠 Anyone** who needs quick, reliable place information
+
+---
+
+## ⚡ **Key Features**
+
+### **🔥 Core Functionality**
+
+- **Natural Language Search**: Ask questions as you would to a local friend
+- **Comprehensive Place Data**: Ratings, reviews, hours, contact info, price levels
+- **Direct Google Maps Integration**: Instant links to full place details
+- **Smart Filtering**: Search by type, rating, price range, and availability
+
+### **💡 Smart Experience**
+
+- **Persistent Chat History**: Never lose your research
+- **User Authentication**: Secure personal search history
+- **Daily Usage Limits**: Fair usage for all users
+
+---
+
+## 📊 **Usage Limits**
+
+- **Fair Usage Policy**: Daily message limits to ensure quality service for all users
+- **Rate Limiting**: Prevents API abuse and maintains performance
+
+---
+
+## 🤝 **Contributing**
+
+We welcome contributions! Whether it's:
+
+- 🐛 **Bug fixes**
+- ✨ **New features**
+- 📚 **Documentation improvements**
+- 🎨 **UI/UX enhancements**
+
+---
+
+## 🎯 **Coming Soon**
+
+- 📍 **Location-based recommendations**
+- 🗺️ **Interactive map integration**
+- 🌍 **Multi-language support**
+
+---
+
+**Ready to revolutionize how you discover places?**
