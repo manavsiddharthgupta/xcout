@@ -80,7 +80,7 @@ export async function POST(req: Request) {
     maxSteps: 5,
     onFinish: async (message) => {
       // save the assistant's message
-      saveMessage({
+      await saveMessage({
         chatId: id,
         role: "assistant",
         content: message.response.messages
