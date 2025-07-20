@@ -1,4 +1,4 @@
-import { eq, and, asc } from "drizzle-orm"
+import { eq, and, asc, count, gte } from "drizzle-orm"
 import { db } from "../db/db"
 import {
   chat,
@@ -214,5 +214,37 @@ export async function getChatMessages(
   } catch (error) {
     console.error("Error fetching chat messages:", error)
     throw new Error("Failed to fetch chat messages")
+  }
+}
+
+export async function getMessageCountByUserId({
+  id,
+  differenceInHours,
+}: {
+  id: string
+  differenceInHours: number
+}) {
+  try {
+    const twentyFourHoursAgo = new Date(
+      Date.now() - differenceInHours * 60 * 60 * 1000
+    )
+
+    const [stats] = await db
+      .select({ count: count(message.id) })
+      .from(message)
+      .innerJoin(chat, eq(message.chatId, chat.id))
+      .where(
+        and(
+          eq(chat.userId, id),
+          gte(message.createdAt, twentyFourHoursAgo),
+          eq(message.role, "user")
+        )
+      )
+      .execute()
+
+    return stats?.count ?? 0
+  } catch (error) {
+    console.error("Error fetching message count:", error)
+    throw new Error("Failed to fetch message count")
   }
 }

@@ -281,9 +281,7 @@ export function SidebarContentComponent() {
       ))}
 
       {/* Loading state */}
-      {(isLoading || isLoadingMore) && (
-        <Loader className="animate-spin mx-auto mt-6" />
-      )}
+      {isLoading && <Loader className="animate-spin mx-auto mt-6" />}
 
       {/* Empty state */}
       {!isLoading &&

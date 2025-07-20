@@ -31,3 +31,5 @@ export const importantFields = [
   "places.parkingOptions",
   "places.paymentOptions",
 ]
+
+export const MAX_MESSAGE_COUNT_PER_DAY = 10

@@ -6,7 +6,13 @@ import {
   SYSTEM_PROMPT_PLACES_TITLE,
 } from "@/constants/system-prompt"
 import { auth } from "@/lib/auth"
-import { getChatById, saveChat, saveMessage } from "@/lib/controllers/chat"
+import {
+  getChatById,
+  getMessageCountByUserId,
+  saveChat,
+  saveMessage,
+} from "@/lib/controllers/chat"
+import { MAX_MESSAGE_COUNT_PER_DAY } from "@/constants/fields"
 
 export const maxDuration = 30
 
@@ -17,6 +23,15 @@ export async function POST(req: Request) {
   const session = await auth.api.getSession({ headers: req.headers })
   if (!session?.user?.id) {
     return new Response("Unauthorized", { status: 401 })
+  }
+
+  const messageCount = await getMessageCountByUserId({
+    id: session.user.id,
+    differenceInHours: 24,
+  })
+
+  if (messageCount >= MAX_MESSAGE_COUNT_PER_DAY) {
+    return new Response("Daily message limit exceeded", { status: 429 })
   }
 
   const chat = await getChatById({ id })
