@@ -1,8 +1,14 @@
 import Link from "next/link"
-import { Sidebar, SidebarHeader, SidebarTrigger } from "@/components/ui/sidebar"
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarTrigger,
+  SidebarFooter,
+} from "@/components/ui/sidebar"
 import { Button } from "./ui/button"
 import { Plus } from "lucide-react"
 import { SidebarContentComponent } from "./sidebar-content"
+import { ProfileBar } from "./profile"
 
 export function AppSidebar() {
   return (
@@ -21,6 +27,10 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContentComponent />
+
+      <SidebarFooter>
+        <ProfileBar />
+      </SidebarFooter>
     </Sidebar>
   )
 }
