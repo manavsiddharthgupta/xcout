@@ -33,7 +33,7 @@ export default function Messages({ messages, status }: MessagesProps) {
       <div className="flex-1 max-w-3xl w-full mx-auto mt-16 px-4">
         <div className="flex flex-col justify-center h-full gap-2">
           <p className="font-bold text-3xl">Hello there!</p>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg max-md:text-base">
             You can search for places like <b>pizza in New York</b>,{" "}
             <b>shoe stores near Ottawa</b>, or specific addresses like{" "}
             <b>123 Main Street</b>. I can help you find businesses, landmarks,
