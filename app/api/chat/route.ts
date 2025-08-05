@@ -21,6 +21,7 @@ export async function POST(req: Request) {
 
   // Get authenticated user
   const session = await auth.api.getSession({ headers: req.headers })
+  console.log("session", session)
   if (!session?.user?.id) {
     return new Response("Unauthorized", { status: 401 })
   }
