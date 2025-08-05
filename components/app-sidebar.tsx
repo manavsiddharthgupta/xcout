@@ -1,12 +1,10 @@
-import Link from "next/link"
 import {
   Sidebar,
   SidebarHeader,
   SidebarTrigger,
   SidebarFooter,
 } from "@/components/ui/sidebar"
-import { Button } from "./ui/button"
-import { Plus } from "lucide-react"
+import NewChatBtn from "./new-chat-btn"
 import { SidebarContentComponent } from "./sidebar-content"
 import { ProfileBar } from "./profile"
 
@@ -18,12 +16,7 @@ export function AppSidebar() {
           <SidebarTrigger />
         </div>
         <p className="text-xl font-bold text-center">xcout ai</p>
-        <Button className="font-semibold" asChild>
-          <Link href="/">
-            <Plus className="h-4 w-4" />
-            New Chat
-          </Link>
-        </Button>
+        <NewChatBtn />
       </SidebarHeader>
 
       <SidebarContentComponent />
