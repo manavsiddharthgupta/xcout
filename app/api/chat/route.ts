@@ -13,6 +13,7 @@ import {
   saveMessage,
 } from "@/lib/controllers/chat"
 import { MAX_MESSAGE_COUNT_PER_DAY } from "@/constants/fields"
+import { NextResponse } from "next/server"
 
 export const maxDuration = 30
 
@@ -21,8 +22,8 @@ export async function POST(req: Request) {
 
   // Get authenticated user
   const session = await auth.api.getSession({ headers: req.headers })
-  if (!session?.user?.id) {
-    return new Response("Unauthorized", { status: 401 })
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
   const messageCount = await getMessageCountByUserId({
