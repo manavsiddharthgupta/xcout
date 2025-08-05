@@ -2,10 +2,9 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import Chat from "@/components/chat"
 import SignOutBtn from "@/components/signout-btn"
-import { generateId } from "ai"
 
 export default function Home() {
-  const chatId = generateId()
+  const chatId = crypto.randomUUID()
   return (
     <div className="h-screen flex flex-col overflow-y-auto">
       <div className="fixed top-3 left-3">
