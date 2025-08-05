@@ -11,6 +11,7 @@ import { AIMessage, AIMessageContent } from "@/components/ui/kibo-ui/ai/message"
 import { useEffect, useRef } from "react"
 import { UIMessage } from "ai"
 import { Spinner } from "@/components/ui/kibo-ui/spinner"
+import { usePathname } from "next/navigation"
 
 interface MessagesProps {
   messages: UIMessage[]
@@ -19,7 +20,7 @@ interface MessagesProps {
 
 export default function Messages({ messages, status }: MessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
-
+  const pathname = usePathname()
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
@@ -28,7 +29,7 @@ export default function Messages({ messages, status }: MessagesProps) {
     scrollToBottom()
   }, [messages])
 
-  if (messages.length === 0) {
+  if (messages.length === 0 || pathname === "/") {
     return (
       <div className="flex-1 max-w-3xl w-full mx-auto mt-16 px-4">
         <div className="flex flex-col justify-center h-full gap-2">
